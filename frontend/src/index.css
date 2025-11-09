@@ -1,0 +1,33 @@
+/* ✅ Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ✅ Import Tailwind */
+@import "tailwindcss";
+
+/* ✅ Apply font globally */
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #f8fafc;
+  color: #111827;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: make headings look strong */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* Optional: adjust link hover and active */
+a {
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #1e3a8a;
+}

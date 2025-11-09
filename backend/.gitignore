@@ -1,0 +1,61 @@
+# Node modules and build
+node_modules/
+dist/
+build/
+coverage/
+tmp/
+temp/
+
+# Environment and local configuration
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Prisma generated files
+prisma/dev.db
+prisma/test.db
+prisma/migrations/
+prisma/.env
+prisma/generated/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Jest cache / coverage
+coverage/
+jest-cache/
+jest-test-results.json
+
+# Optional: local database dumps
+*.sql
+*.sqlite
+
+# Mac & Windows system files
+.DS_Store
+Desktop.ini
+
+# Optional: skip local scripts/output
+scripts/old/
+scripts/__pycache__/
