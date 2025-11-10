@@ -1,18 +1,20 @@
-// src/adapters/infrastructure/fetchHelpers.ts
+// frontend/src/adapters/infrastructure/fetchHelpers.ts
 export async function fetchJson(url: string, opts?: RequestInit) {
   const res = await fetch(url, opts);
-  const text = await res.text();
-  let json: any = null;
-  try {
-    json = text ? JSON.parse(text) : null;
-  } catch {
-    json = text;
-  }
   if (!res.ok) {
-    const msg =
-      (json && (json.error || json.message || json.detail)) ||
-      (typeof json === "string" ? json : `HTTP ${res.status}`);
-    throw new Error(msg);
+    let msg = `HTTP ${res.status}`;
+    try {
+      const j = await res.json();
+      msg = j.error ?? j.message ?? JSON.stringify(j);
+    } catch {}
+    throw new Error(`${res.status} ${res.statusText}: ${msg}`);
   }
-  return json;
+  // try parse json
+  const text = await res.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
 }

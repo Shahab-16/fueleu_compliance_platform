@@ -1,4 +1,4 @@
-// src/core/domain/Route.ts
+// frontend/src/core/domain/Route.ts
 export type Route = {
   id?: number;
   routeId: string;

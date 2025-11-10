@@ -1,4 +1,4 @@
-// src/adapters/ui/AppRouter.tsx
+// frontend/src/adapters/ui/AppRouter.tsx
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";

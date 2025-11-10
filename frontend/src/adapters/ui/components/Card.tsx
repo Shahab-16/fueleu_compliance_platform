@@ -1,4 +1,4 @@
-// src/adapters/ui/components/Card.tsx
+// frontend/src/adapters/ui/components/Card.tsx
 import React from "react";
 
 type Props = {
@@ -12,7 +12,7 @@ export default function Card({ title, value, color = "bg-white", children }: Pro
   return (
     <div className={`p-4 rounded-lg shadow-sm ${color}`}>
       {title && <div className="text-sm text-gray-600">{title}</div>}
-      {value && <div className="text-2xl font-semibold mt-1">{value}</div>}
+      {value !== undefined && <div className="text-2xl font-semibold mt-1">{value}</div>}
       {children}
     </div>
   );

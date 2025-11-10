@@ -1,4 +1,4 @@
-// src/adapters/ui/pages/ComparePage.tsx
+// frontend/src/adapters/ui/pages/ComparePage.tsx
 import React, { useEffect, useState } from "react";
 import { getRoutesComparison } from "../../infrastructure/apiClient";
 import { TARGET_INTENSITY } from "../../../shared/constants";

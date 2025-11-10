@@ -1,4 +1,4 @@
-// src/adapters/ui/pages/RoutesPage.tsx
+// frontend/src/adapters/ui/pages/RoutesPage.tsx
 import React, { useEffect, useState } from "react";
 import { getRoutes, setBaseline } from "../../infrastructure/apiClient";
 import type { Route } from "../../../core/domain/Route";
@@ -6,18 +6,16 @@ import type { Route } from "../../../core/domain/Route";
 const RoutesPage: React.FC = () => {
   const [routes, setRoutes] = useState<Route[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState({ vesselType: "All", fuelType: "All", year: "All" });
 
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        const body = await getRoutes();
-        const data = Array.isArray(body) ? body : body.data ?? body.routes ?? [];
-        if (alive) setRoutes(data);
+        const data = await getRoutes();
+        if (alive) setRoutes(data ?? []);
       } catch (err: any) {
-        setError(err.message || "Failed to load");
+        console.error(err);
       } finally {
         if (alive) setLoading(false);
       }
@@ -28,9 +26,8 @@ const RoutesPage: React.FC = () => {
   const applyBaseline = async (routeId: string) => {
     try {
       await setBaseline(routeId);
-      const body = await getRoutes();
-      const data = Array.isArray(body) ? body : body.data ?? body.routes ?? [];
-      setRoutes(data);
+      const data = await getRoutes();
+      setRoutes(data ?? []);
       alert(`Set ${routeId} as baseline`);
     } catch (e: any) {
       alert(`Failed: ${e.message}`);
@@ -71,8 +68,6 @@ const RoutesPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow overflow-auto">
         {loading ? (
           <div className="p-6">Loading...</div>
-        ) : error ? (
-          <div className="p-6 text-red-600">Error: {error}</div>
         ) : (
           <table className="min-w-full text-left text-sm">
             <thead className="bg-gray-50">
@@ -100,7 +95,7 @@ const RoutesPage: React.FC = () => {
                   <td className="px-4 py-2">{r.distance ?? r.distanceKm ?? "-"}</td>
                   <td className="px-4 py-2">{r.totalEmissions ?? r.totalEmissionsT ?? "-"}</td>
                   <td className="px-4 py-2">
-                    <button onClick={() => applyBaseline(r.routeId)} className="text-sm px-3 py-1 bg-blue-600 text-white rounded">Set Baseline</button>
+                    <button onClick={() => applyBaseline(r.routeId)} className="text-sm px-3 py-1 bg-sky-600 text-white rounded">Set Baseline</button>
                   </td>
                 </tr>
               ))}
